@@ -6,7 +6,7 @@ pipeline {
     }
 
     tools {
-        nodejs "${NODE_VERSIONS}"
+        nodejs 'NodeJS 20'
     }
 
     stages {
@@ -39,11 +39,11 @@ pipeline {
                 }
             }
         }
+    }
 
-        post {
-            always {
-                echo 'CI pipeline completed'
-            }
+    post {
+        always {
+            echo "CI pipeline completed"
         }
     }
 }
