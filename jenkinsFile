@@ -1,56 +1,49 @@
-pipeline{
+pipeline {
     agent any
 
-    enviropment{
+    environment {
         NODE_VERSIONS = '20.x'
     }
 
-    tools{
+    tools {
         nodejs "${NODE_VERSIONS}"
     }
 
-    stage{
-        stage('Checkout'){
-            steps{
+    stages {
+        stage('Checkout') {
+            steps {
                 git branch: 'main', url: 'https://github.com/Edel-Weiss/StudentRegistryApp'
             }
         }
 
-        stage('Installing dependencies'){
-            steps{
-                script{
-                    
+        stage('Installing dependencies') {
+            steps {
+                script {
                     bat 'npm install'
-                    
                 }
             }
         }
 
-        stage('Start the application'){
-            steps{
-                script{
+        stage('Start the application') {
+            steps {
+                script {
                     bat 'start /b npm start'
-                    
                 }
             }
         }
 
-        stage('Run tests'){
-            steps{
-                script{
+        stage('Run tests') {
+            steps {
+                script {
                     bat 'npm test'
                 }
             }
         }
 
-        post{
-            always{
-                echo "CI pipeline completed"
+        post {
+            always {
+                echo 'CI pipeline completed'
             }
         }
-
-
-
-
     }
 }
